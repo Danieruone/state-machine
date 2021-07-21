@@ -2,13 +2,22 @@ class Machine {
   alphabet = ["f", "i", "n", "d"];
   input = [];
   validator = [];
+  stateOptions = {
+    f: (letter) => this.q0(letter),
+    i: (letter) => this.q1(letter),
+    n: (letter) => this.q2(letter),
+    d: (letter) => this.q3(letter),
+  };
 
   constructor(string) {
     this.input = string.toLowerCase().split("");
   }
 
   startMachine() {
-    if (!this.validateString()) return console.log("String NO válido");
+    if (!this.validateString())
+      return console.log(
+        "El string contiene símbolos que no corresponden al alfabeto"
+      );
     return this.startStates();
   }
 
@@ -20,20 +29,7 @@ class Machine {
 
   startStates() {
     this.input.map((letter) => {
-      switch (letter) {
-        case "f":
-          this.q0(letter);
-          break;
-        case "i":
-          this.q1(letter);
-          break;
-        case "n":
-          this.q2(letter);
-          break;
-        case "d":
-          this.q3(letter);
-          break;
-      }
+      return this.stateOptions[letter](letter);
     });
     if (this.validateResult()) {
       console.log("String válido");
