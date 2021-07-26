@@ -25,4 +25,9 @@ describe("state machine tests", () => {
     let machine = new Machine("innfnd");
     expect(machine.startMachine()).toBe(true);
   });
+
+  test("get a string 'fnfiinfddi' in the class and validate it", () => {
+    let machine = new Machine("fnfiinfddi");
+    expect(machine.startMachine()).toBe(true);
+  });
 });

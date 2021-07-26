@@ -42,19 +42,19 @@ class Machine {
 
   q0(letter) {
     console.log(`Estado actual q0 con valor ${letter}`);
-    if (!this.validator.includes("f")) this.validator.push(letter);
+    !this.validator.includes("f") && this.validator.push(letter);
   }
   q1(letter) {
     console.log(`Estado actual q1 con valor ${letter}`);
-    if (!this.validator.includes("i")) this.validator.push(letter);
+    !this.validator.includes("i") && this.validator.push(letter);
   }
   q2(letter) {
     console.log(`Estado actual q2 con valor ${letter}`);
-    if (!this.validator.includes("n")) this.validator.push(letter);
+    !this.validator.includes("n") && this.validator.push(letter);
   }
   q3(letter) {
     console.log(`Estado actual q3 con valor ${letter}`);
-    if (!this.validator.includes("d")) this.validator.push(letter);
+    !this.validator.includes("d") && this.validator.push(letter);
   }
 
   validateResult() {
