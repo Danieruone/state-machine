@@ -37,7 +37,7 @@ class Machine {
     });
     if (this.validateResult()) {
       console.log(
-        `String válido, con un número final de ${this.validator.length} estados`
+        `String válido, con un número final de ${this.validator.length} iteraciones`
       );
       return true;
     } else {
