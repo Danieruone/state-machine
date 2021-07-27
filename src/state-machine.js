@@ -8,12 +8,15 @@ class Machine {
     n: (letter) => this.q2(letter),
     d: (letter) => this.q3(letter),
   };
+  stateTransitions = {
+    f: "q0",
+    i: "q1",
+    n: "q2",
+    d: "q3",
+  };
 
-  constructor(string) {
+  startMachine(string) {
     this.input = string.toLowerCase().split("");
-  }
-
-  startMachine() {
     if (!this.validateString())
       return console.log(
         "El string contiene símbolos que no corresponden al alfabeto"
@@ -29,10 +32,13 @@ class Machine {
 
   startStates() {
     this.input.map((letter) => {
+      console.log(`Siguiente transición: ${this.stateTransitions[letter]}`);
       return this.stateOptions[letter](letter);
     });
     if (this.validateResult()) {
-      console.log("String válido");
+      console.log(
+        `String válido, con un número final de ${this.validator.length} estados`
+      );
       return true;
     } else {
       console.log("String NO válido");
@@ -42,19 +48,19 @@ class Machine {
 
   q0(letter) {
     console.log(`Estado actual q0 con valor ${letter}`);
-    !this.validator.includes("f") && this.validator.push(letter);
+    this.validator.push(letter);
   }
   q1(letter) {
     console.log(`Estado actual q1 con valor ${letter}`);
-    !this.validator.includes("i") && this.validator.push(letter);
+    this.validator.push(letter);
   }
   q2(letter) {
     console.log(`Estado actual q2 con valor ${letter}`);
-    !this.validator.includes("n") && this.validator.push(letter);
+    this.validator.push(letter);
   }
   q3(letter) {
     console.log(`Estado actual q3 con valor ${letter}`);
-    !this.validator.includes("d") && this.validator.push(letter);
+    this.validator.push(letter);
   }
 
   validateResult() {
