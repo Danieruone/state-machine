@@ -2,18 +2,8 @@ class Machine {
   alphabet = ["f", "i", "n", "d"];
   input = [];
   validator = [];
-  stateOptions = {
-    f: (letter) => this.q0(letter),
-    i: (letter) => this.q1(letter),
-    n: (letter) => this.q2(letter),
-    d: (letter) => this.q3(letter),
-  };
-  stateTransitions = {
-    f: "q0",
-    i: "q1",
-    n: "q2",
-    d: "q3",
-  };
+  currentState = 0;
+  totalStates = [];
 
   startMachine(string) {
     this.input = string.toLowerCase().split("");
@@ -31,13 +21,10 @@ class Machine {
   }
 
   startStates() {
-    this.input.map((letter) => {
-      console.log(`Siguiente transición: ${this.stateTransitions[letter]}`);
-      return this.stateOptions[letter](letter);
-    });
+    this.input.map((letter, idx) => this.validateState(letter, idx));
     if (this.validateResult()) {
       console.log(
-        `String válido, con un número final de ${this.validator.length} iteraciones`
+        `String válido, con un número final de ${this.validator.length} iteraciones, con los estados: ${this.totalStates}`
       );
       return true;
     } else {
@@ -46,20 +33,21 @@ class Machine {
     }
   }
 
-  q0(letter) {
-    console.log(`Estado actual q0 con valor ${letter}`);
-    this.validator.push(letter);
+  validateState(letter, idx) {
+    if (idx === 0) {
+      this.totalStates.push("q0");
+    } else {
+      if (this.input[idx - 1] !== letter) {
+        this.currentState++;
+        this.totalStates.push(`q${this.currentState}`);
+      }
+    }
+    console.log(`Siguiente transición: q${this.currentState}`);
+    return this.generateState(letter);
   }
-  q1(letter) {
-    console.log(`Estado actual q1 con valor ${letter}`);
-    this.validator.push(letter);
-  }
-  q2(letter) {
-    console.log(`Estado actual q2 con valor ${letter}`);
-    this.validator.push(letter);
-  }
-  q3(letter) {
-    console.log(`Estado actual q3 con valor ${letter}`);
+
+  generateState(letter) {
+    console.log(`Estado actual q${this.currentState} con valor ${letter}`);
     this.validator.push(letter);
   }
 
