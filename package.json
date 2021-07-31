@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "colors": "^1.4.0",
     "jest": "^27.0.6",
     "node": "^16.5.0",
     "xml-js": "^1.6.11",

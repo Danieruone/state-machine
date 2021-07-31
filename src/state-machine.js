@@ -1,3 +1,5 @@
+const colors = require("colors");
+
 class Machine {
   alphabet = ["f", "i", "n", "d"];
   input = [];
@@ -24,11 +26,12 @@ class Machine {
     this.input.map((letter, idx) => this.validateState(letter, idx));
     if (this.validateResult()) {
       console.log(
-        `String válido, con un número final de ${this.validator.length} iteraciones, con los estados: ${this.totalStates}`
+        `String válido \nNúmero final de iteraciones: ${this.validator.length} \nEstados: ${this.totalStates}`
+          .green
       );
       return true;
     } else {
-      console.log("String NO válido");
+      console.log("String NO válido".red);
       return false;
     }
   }
@@ -42,12 +45,14 @@ class Machine {
         this.totalStates.push(`q${this.currentState}`);
       }
     }
-    console.log(`Siguiente transición: q${this.currentState}`);
+    console.log(`Siguiente transición: q${this.currentState}`.bgBlue.black);
     return this.generateState(letter);
   }
 
   generateState(letter) {
-    console.log(`Estado actual q${this.currentState} con valor ${letter}`);
+    console.log(
+      `Estado actual q${this.currentState} con valor ${letter}`.bgYellow.black
+    );
     this.validator.push(letter);
   }
 
