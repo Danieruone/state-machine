@@ -1,4 +1,4 @@
-const colors = require("colors");
+require("colors");
 
 class Machine {
   alphabet = ["f", "i", "n", "d"];
